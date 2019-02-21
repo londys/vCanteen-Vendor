@@ -3,5 +3,13 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/sfprotext_bold" />
+        android:font="@font/sfprotext_regular" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="500"
+        android:font="@font/sfprotext_medium" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="600"
+        android:font="@font/sfprotext_semibold" />
 </font-family>
