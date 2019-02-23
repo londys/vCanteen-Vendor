@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Button menuButton; //MENU
     Button salesRecordButton; //SALES RECORD
     Button settingsButton; //SETTINGS
+
     Button doneButton;
     Button cancelButton;
     TextView orderNo;
@@ -63,10 +64,31 @@ public class MainActivity extends AppCompatActivity {
 
         //////////////////////////////////////////   Navigation   //////////////////////////////////////
 
+        /*orderStatusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMain();
+            }
+        });*/
+
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToMenu();
+            }
+        });
+
+        salesRecordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToSalesRecord();
+            }
+        });
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToSettings();
             }
         });
 
@@ -85,13 +107,24 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-
+    //////////////////////////////////////////   Navigation(cont.)   //////////////////////////////////////
+    /*public void goToMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }*/
 
     public void goToMenu(){
         Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToSalesRecord() {
+        Intent intent = new Intent(this, SalesRecordActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToSettings() {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 

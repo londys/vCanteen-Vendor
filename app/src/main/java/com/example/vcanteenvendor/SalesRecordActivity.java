@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MenuActivity extends AppCompatActivity {
+public class SalesRecordActivity extends AppCompatActivity {
 
 
     Button orderStatusButton; //ORDER STATUS
@@ -18,13 +18,13 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_sales_record);
+
 
         orderStatusButton= (Button) findViewById(R.id.orderStatusButton);
         menuButton= (Button) findViewById(R.id.menuButton);
         salesRecordButton= (Button) findViewById(R.id.salesRecordButton);
         settingsButton= (Button) findViewById(R.id.settingsButton);
-
 
 
         //////////////////////////////////////////   Navigation   //////////////////////////////////////
@@ -35,19 +35,19 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        /*menuButton.setOnClickListener(new View.OnClickListener() {
+        menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToMenu();
             }
-        });*/
+        });
 
-        salesRecordButton.setOnClickListener(new View.OnClickListener() {
+        /*salesRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToSalesRecord();
             }
-        });
+        });*/
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,18 +66,20 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*public void goToMenu(){
+    public void goToMenu(){
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
-    }*/
+    }
 
-    public void goToSalesRecord() {
+    /*public void goToSalesRecord() {
         Intent intent = new Intent(this, SalesRecordActivity.class);
         startActivity(intent);
-    }
+    }*/
 
     public void goToSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
+
+
 }

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MenuActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
 
 
     Button orderStatusButton; //ORDER STATUS
@@ -18,13 +18,13 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_settings);
+
 
         orderStatusButton= (Button) findViewById(R.id.orderStatusButton);
         menuButton= (Button) findViewById(R.id.menuButton);
         salesRecordButton= (Button) findViewById(R.id.salesRecordButton);
         settingsButton= (Button) findViewById(R.id.settingsButton);
-
 
 
         //////////////////////////////////////////   Navigation   //////////////////////////////////////
@@ -35,12 +35,12 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        /*menuButton.setOnClickListener(new View.OnClickListener() {
+        menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToMenu();
             }
-        });*/
+        });
 
         salesRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,16 +49,15 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        settingsButton.setOnClickListener(new View.OnClickListener() {
+        /*settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToSettings();
             }
-        });
+        });*/
 
 
     }
-
 
     //////////////////////////////////////////   Navigation(cont.)   //////////////////////////////////////
     public void goToMain() {
@@ -66,18 +65,20 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*public void goToMenu(){
+    public void goToMenu(){
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
-    }*/
+    }
 
     public void goToSalesRecord() {
         Intent intent = new Intent(this, SalesRecordActivity.class);
         startActivity(intent);
     }
 
-    public void goToSettings() {
+   /* public void goToSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
-    }
+    }*/
+
+
 }
