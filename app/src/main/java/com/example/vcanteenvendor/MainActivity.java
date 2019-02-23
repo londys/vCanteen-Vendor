@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         //////////////////////////////////////////   Order Adapter   //////////////////////////////////////
 
-        String[] test = {"Food1","Food2","Food3","Food4","Food5","Food6"};
+        String[] test = {"Fried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky Rice","Fried Chicken with Sticky RiceFried Chicken with Sticky Rice","Food3","Food4","Fried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky Rice","Food6"};
         ListAdapter testAdapter = new OrderAdapter(this, test);
         ListView orderlist = findViewById(R.id.orderlist);
         orderlist.setAdapter(testAdapter);
