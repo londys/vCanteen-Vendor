@@ -21,7 +21,9 @@
 
         android:text="#1"
         android:textColor="#333333"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        android:fontFamily="@font/sfprotext_regular"
+        />
 
     <LinearLayout
         android:layout_width="570dp"
@@ -41,6 +43,7 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:text="Fried Chicken with Sticky Rice"
+            android:fontFamily="@font/sfprotext_bold"
 
 
             android:textColor="#333333"
@@ -54,7 +57,11 @@
             android:text="Extra"
 
             android:textColor="#4F4F4F"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:fontFamily="@font/sfprotext_regular"
+
+            />
+
     </LinearLayout>
 
     <Button
@@ -71,6 +78,7 @@
         android:text="CANCEL"
         android:textSize="20sp"
         android:textColor="#FF9C9C"
+        android:fontFamily="@font/sfprotext_semibold"
 
         />
 
@@ -87,6 +95,7 @@
         android:text="DONE"
         android:textSize="20sp"
         android:textColor="#FFFFFF"
+        android:fontFamily="@font/sfprotext_semibold"
 
         android:background="@drawable/shape_button"
         />

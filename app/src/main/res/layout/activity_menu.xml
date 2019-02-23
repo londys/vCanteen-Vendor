@@ -23,7 +23,7 @@
             android:id="@+id/orderStatusButton"
 
             style="@style/MyButtonStyle"
-            android:drawableLeft="@drawable/ic_order_red"
+            android:drawableStart="@drawable/ic_order"
             android:drawablePadding="12dp"
             android:paddingLeft="70dp"
             android:paddingRight="70dp"
@@ -32,11 +32,10 @@
             android:layout_weight="1"
             android:text="ORDER STATUS"
             android:textSize="18sp"
-
-            android:textColor="#FF4141"
-            android:background="#FFF5F4"
             android:fontFamily="@font/sfprotext_semibold"
 
+            android:textColor="#828282"
+            android:background="#FFFFFF"
 
             />
 
@@ -49,18 +48,21 @@
             android:layout_height="match_parent"
 
             android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:drawableStart="@drawable/ic_menu"
+
+            android:drawableStart="@drawable/ic_menu_red"
             android:drawablePadding="12dp"
-            android:paddingStart="110dp"
-            android:paddingEnd="120dp"
+            android:paddingLeft="110dp"
+            android:paddingRight="120dp"
             android:text="MENU"
             android:fontFamily="@font/sfprotext_semibold"
 
             android:textAlignment="textEnd"
-            android:textColor="#828282"
+            android:textColor="#FF4141"
+            android:background="#FFF5F4"
 
             android:textSize="18sp" />
+
+
         <Button
 
             android:id="@+id/salesRecordButton"
@@ -76,10 +78,10 @@
             android:layout_weight="1"
             android:text="SALES RECORD"
             android:textSize="18sp"
-            android:fontFamily="@font/sfprotext_semibold"
 
             android:textColor="#828282"
             android:background="#FFFFFF"
+            android:fontFamily="@font/sfprotext_semibold"
 
             />
 
@@ -125,14 +127,14 @@
         android:layout_height="2dp"
         android:background="?android:attr/listDivider" />
 
-    <ListView
+    <!--<ListView
         android:id="@+id/orderlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:dividerHeight="1dp"
         android:footerDividersEnabled="true"
-        android:scrollbars="horizontal" />
+        android:scrollbars="horizontal" />-->
 
 
 </LinearLayout>
