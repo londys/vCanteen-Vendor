@@ -127,6 +127,34 @@
         android:layout_height="2dp"
         android:background="?android:attr/listDivider" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="128dp"
+                android:layout_height="24dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="8dp"
+                android:layout_alignParentTop="true"
+                android:text="Combination"
+                android:textAppearance="@style/menuTypeHeadline"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/textView"
+                android:layout_marginTop="32dp" />
+        </RelativeLayout>
+    </ScrollView>
+
     <!--<ListView
         android:id="@+id/orderlist"
         android:layout_width="match_parent"

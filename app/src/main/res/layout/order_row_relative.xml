@@ -2,67 +2,67 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_height="wrap_content"
     android:minHeight="?listPreferredItemHeight"
-    android:paddingBottom="8dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="8dp"
+    android:padding="24dp"
     >
 
     <TextView
         android:id="@+id/orderNo"
-        android:layout_width="30dp"
-        android:layout_height="27dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:gravity="right"
 
+        android:layout_marginStart="26dp"
+
+
+        android:fontFamily="@font/sfprotext_regular"
+        android:gravity="end"
         android:text="#1"
         android:textColor="#333333"
-        android:textSize="22sp"
-        android:fontFamily="@font/sfprotext_regular"
-        />
+        android:textSize="22sp" />
 
-    <LinearLayout
-        android:layout_width="570dp"
-        android:layout_height="match_parent"
 
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="123dp"
+    <TextView
+        android:id="@+id/foodName"
+        android:layout_width="790dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:orientation="vertical"
-        >
+        android:layout_marginStart="48dp"
 
-        <TextView
-            android:id="@+id/foodName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="Fried Chicken with Sticky Rice"
-            android:fontFamily="@font/sfprotext_bold"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="48dp"
+        android:layout_toStartOf="@+id/cancelButton"
+        android:layout_toEndOf="@+id/orderNo"
 
 
-            android:textColor="#333333"
-            android:textSize="32sp" />
+        android:ellipsize="end"
+        android:fontFamily="@font/sfprotext_bold"
 
-        <TextView
-            android:id="@+id/foodExtra"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="Extra"
+        android:text="Fried Chicken with Sticky Rice Fried Chicken with Sticky Rice Fried Chicken with Sticky Rice"
+        android:textColor="#333333"
+        android:textSize="32sp" />
 
-            android:textColor="#4F4F4F"
-            android:textSize="24sp"
-            android:fontFamily="@font/sfprotext_regular"
+    <TextView
+        android:id="@+id/foodExtra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/foodName"
+        android:layout_alignParentBottom="true"
 
-            />
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="48dp"
 
-    </LinearLayout>
+        android:layout_marginBottom="4dp"
+        android:layout_toStartOf="@+id/cancelButton"
+        android:layout_toEndOf="@+id/orderNo"
+        android:fontFamily="@font/sfprotext_regular"
+        android:text="Extra"
+        android:textColor="#4F4F4F"
+        android:textSize="24sp" />
+
 
     <Button
         android:id="@+id/cancelButton"
@@ -70,17 +70,17 @@
 
         android:layout_width="130dp"
         android:layout_height="48dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="170dp"
+
+
+        android:layout_marginEnd="32dp"
+
         android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/doneButton"
 
-
-        android:text="CANCEL"
-        android:textSize="20sp"
-        android:textColor="#FF9C9C"
         android:fontFamily="@font/sfprotext_semibold"
-
-        />
+        android:text="CANCEL"
+        android:textColor="#FF9C9C"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/doneButton"
@@ -89,7 +89,7 @@
         android:layout_width="130dp"
         android:layout_height="68dp"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="24dp"
+        android:layout_marginRight="0dp"
         android:layout_centerVertical="true"
 
         android:text="DONE"
