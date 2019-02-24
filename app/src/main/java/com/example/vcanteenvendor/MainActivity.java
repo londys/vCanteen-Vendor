@@ -12,6 +12,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -25,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
     TextView orderNo;
     TextView foodName;
     TextView foodExtra;
+
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
         ListAdapter testAdapter = new OrderAdapter(this, test);
         ListView orderlist = findViewById(R.id.orderlist);
         orderlist.setAdapter(testAdapter);
+
+
 
     }
 
