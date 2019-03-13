@@ -20,6 +20,9 @@ public class MenuActivity extends AppCompatActivity {
     Button settingsButton; //SETTINGS
 
 
+    Button addMenuButton; //+ ADD MENU
+
+
     List<Menu> lstMenu;
 
     @Override
@@ -31,10 +34,12 @@ public class MenuActivity extends AppCompatActivity {
         menuButton= (Button) findViewById(R.id.menuButton);
         salesRecordButton= (Button) findViewById(R.id.salesRecordButton);
         settingsButton= (Button) findViewById(R.id.settingsButton);
+        addMenuButton = (Button) findViewById(R.id.addMenuButton);
 
 
 
         //////////////////////////////////////////   Navigation   //////////////////////////////////////
+
         orderStatusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +67,16 @@ public class MenuActivity extends AppCompatActivity {
                 goToSettings();
             }
         });
+
+
+
+        addMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToAddEdit();
+            }
+        });
+
 
 
 
@@ -116,6 +131,13 @@ public class MenuActivity extends AppCompatActivity {
 
     public void goToSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    ////////////////////
+
+    public void goToAddEdit() {
+        Intent intent = new Intent(this, AddEditMenuActivity.class);
         startActivity(intent);
     }
 }
