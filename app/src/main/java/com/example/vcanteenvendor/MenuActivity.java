@@ -83,10 +83,16 @@ public class MenuActivity extends AppCompatActivity {
         lstMenu.add(new Menu("Fried Chicken with Sticky Rice",120,0004,R.drawable.food_pic5));
 
 
-        RecyclerView myrv = (RecyclerView) findViewById(R.id.combinationMenuRecyclerView);
+        RecyclerView combinationMenuRecyclerView = (RecyclerView) findViewById(R.id.combinationMenuRecyclerView);
         MenuRecyclerviewAdapter myAdapter = new MenuRecyclerviewAdapter(this,lstMenu);
-        myrv.setLayoutManager(new GridLayoutManager(this,4));
-        myrv.setAdapter(myAdapter);
+        combinationMenuRecyclerView.setLayoutManager(new GridLayoutManager(this,4));
+        combinationMenuRecyclerView.setAdapter(myAdapter);
+
+
+        RecyclerView alacarteMenuRecyclerView = (RecyclerView) findViewById(R.id.alacarteMenuRecyclerView);
+        MenuRecyclerviewAdapter myAdapter2 = new MenuRecyclerviewAdapter(this,lstMenu);
+        alacarteMenuRecyclerView.setLayoutManager(new GridLayoutManager(this,4));
+        alacarteMenuRecyclerView.setAdapter(myAdapter2);
 
 
     }

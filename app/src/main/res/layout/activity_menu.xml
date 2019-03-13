@@ -127,9 +127,11 @@
         android:layout_height="2dp"
         android:background="?android:attr/listDivider" />
 
+
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -162,14 +164,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_below="@+id/combinationMenuRecyclerView"
+
+                android:layout_alignParentBottom="false"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="0dp"
+                android:background="?android:attr/listDivider" />
+
+
+            <TextView
+                android:id="@+id/alarcarteLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/divider3"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="48dp"
+                android:text="A La Carte"
+                android:textAppearance="@style/menuTypeHeadline" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/alacarteMenuRecyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/alarcarteLabel"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="32dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/alacarteMenuRecyclerView"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="0dp"
                 android:background="?android:attr/listDivider" />
+
+
         </RelativeLayout>
 
 
     </ScrollView>
+
+
+
+
+
+
 
     <!--<ListView
         android:id="@+id/orderlist"
