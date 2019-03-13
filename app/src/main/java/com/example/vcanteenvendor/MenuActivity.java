@@ -71,11 +71,21 @@ public class MenuActivity extends AppCompatActivity {
         lstMenu.add(new Menu("Fried Chicken",50,0002,R.drawable.food_pic3));
         lstMenu.add(new Menu("Sticky Rice",10,0003,R.drawable.food_pic4));
         lstMenu.add(new Menu("Fried Chicken with Sticky Rice",120,0004,R.drawable.food_pic5));
+        lstMenu.add(new Menu("Fried Chicken with Sticky Rice",300,0001,R.drawable.food_pic1));
+        lstMenu.add(new Menu("Fried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky Rice",450,0005,R.drawable.food_pic2));
+        lstMenu.add(new Menu("Fried Chicken",50,0002,R.drawable.food_pic3));
+        lstMenu.add(new Menu("Sticky Rice",10,0003,R.drawable.food_pic4));
+        lstMenu.add(new Menu("Fried Chicken with Sticky Rice",120,0004,R.drawable.food_pic5));
+        lstMenu.add(new Menu("Fried Chicken with Sticky Rice",300,0001,R.drawable.food_pic1));
+        lstMenu.add(new Menu("Fried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky Rice",450,0005,R.drawable.food_pic2));
+        lstMenu.add(new Menu("Fried Chicken",50,0002,R.drawable.food_pic3));
+        lstMenu.add(new Menu("Sticky Rice",10,0003,R.drawable.food_pic4));
+        lstMenu.add(new Menu("Fried Chicken with Sticky Rice",120,0004,R.drawable.food_pic5));
 
 
-        RecyclerView myrv = (RecyclerView) findViewById(R.id.menuRecyclerView);
+        RecyclerView myrv = (RecyclerView) findViewById(R.id.combinationMenuRecyclerView);
         MenuRecyclerviewAdapter myAdapter = new MenuRecyclerviewAdapter(this,lstMenu);
-        myrv.setLayoutManager(new GridLayoutManager(this,5));
+        myrv.setLayoutManager(new GridLayoutManager(this,4));
         myrv.setAdapter(myAdapter);
 
 
