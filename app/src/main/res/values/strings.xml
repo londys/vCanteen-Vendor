@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">vCanteenVendor</string>
+    <string name="vendor_name_label">Vendor\nName</string>
+    <string name="unlink"><u>unlink</u></string>
 </resources>

@@ -128,7 +128,379 @@
         android:layout_height="2dp"
         android:background="?android:attr/listDivider" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
+
+
+        <!--LEFT PANE-->
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="12dp">
+
+
+            <TextView
+                android:id="@+id/vendorProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/sfprotext_bold"
+                android:text="Vendor Profile"
+                android:textColor="@color/colortext"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/vendorProfilePicture"
+                android:layout_width="230dp"
+                android:layout_height="170dp"
+                android:layout_below="@+id/vendorProfile"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/button_white_rounded"
+                app:srcCompat="@drawable/vendor_profile" />
+
+            <EditText
+                android:id="@+id/vendorNameInput"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/vendorProfilePicture"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+
+                android:background="@android:color/transparent"
+                android:focusable="false"
+
+                android:focusableInTouchMode="false"
+                android:fontFamily="@font/sfprotext_regular"
+                android:inputType="none"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="14dp"
+                android:singleLine="true"
+                android:text="E-san Food"
+                android:textColor="#333333"
+                android:textColorHint="#E0E0E0"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/vendorEmailInput"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/vendorNameInput"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+
+                android:background="@android:color/transparent"
+                android:focusable="false"
+
+                android:focusableInTouchMode="false"
+                android:fontFamily="@font/sfprotext_regular"
+                android:inputType="none"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="14dp"
+                android:singleLine="true"
+                android:text="john.doe@email.com"
+                android:textColor="#333333"
+                android:textColorHint="#E0E0E0"
+                android:textSize="18sp" />
+
+
+            <!--LABELS-->
+
+            <TextView
+                android:id="@+id/typeInputLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/vendorProfilePicture"
+                android:layout_marginTop="62dp"
+                android:layout_marginEnd="27dp"
+                android:layout_toStartOf="@+id/vendorNameInput"
+                android:fontFamily="@font/sfprotext_semibold"
+                android:text="Vendor\nName"
+                android:textColor="#828282"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/nameInputLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/vendorNameInput"
+                android:layout_marginTop="38dp"
+                android:layout_marginEnd="33dp"
+                android:layout_toStartOf="@+id/vendorEmailInput"
+                android:fontFamily="@font/sfprotext_semibold"
+                android:text="E-mail"
+                android:textColor="#828282"
+                android:textSize="16sp" />
+
+
+            <Button
+                android:id="@+id/changePasswordButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="48dp"
+                android:layout_marginBottom="30dp"
+                android:layout_toStartOf="@+id/signOutButton"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/sfprotext_bold"
+                android:paddingHorizontal="8dp"
+                android:text="change password"
+                android:textColor="@color/pinkPrimary"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/signOutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/sfprotext_bold"
+                android:paddingHorizontal="8dp"
+                android:text="sign out"
+                android:textColor="@color/pinkPrimary"
+                android:textSize="16sp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginEnd="20dp"/>
+
+
+        </RelativeLayout>
+
+
+
+
+        <!--RIGHT PANE-->
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingVertical="12dp">
+
+
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="?android:attr/listDivider"
+                android:layout_alignParentStart="true"
+                />
+
+
+            <TextView
+                android:id="@+id/paymentMethod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/sfprotext_bold"
+                android:layout_centerHorizontal="true"
+                android:text="Payment Method"
+                android:textColor="@color/colortext"
+                android:textSize="24sp" />
+
+
+            <RelativeLayout
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/paymentMethod"
+                android:layout_marginTop="32dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/cuNexRow"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkCUNex"
+                    android:text="LINKED"
+                    android:drawableStart="@drawable/ic_check"
+                    android:drawablePadding="8dp"
+                    android:textColor="@color/pinkPrimary"
+                    android:fontFamily="@font/sfprotext_regular"
+                    android:textSize="12sp"
+                    android:layout_alignBaseline="@+id/cuNex"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:id="@+id/cuNex"
+                    android:layout_toEndOf="@+id/checkCUNex"
+                    android:text="CU NEX"
+                    android:textColor="@color/colortext"
+                    android:fontFamily="@font/sfprotext_regular"
+                    android:textSize="18sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linkCUNex"
+                    android:text="@string/unlink"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignBaseline="@+id/cuNex"
+                    android:textColor="@color/pinkPrimary"
+                    android:fontFamily="@font/sfprotext_regular"
+                    android:textSize="18sp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/scbRow"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/paymentMethod"
+                android:layout_marginTop="78dp"
+                android:layout_centerHorizontal="true"
+
+                >
+
+                <TextView
+                    android:id="@+id/checkScb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/scbEasy"
+                    android:drawableStart="@drawable/ic_check"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/sfprotext_regular"
+                    android:text="LINKED"
+                    android:textColor="@color/pinkPrimary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/scbEasy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_toEndOf="@+id/checkScb"
+                    android:fontFamily="@font/sfprotext_regular"
+                    android:text="SCB EASY"
+                    android:textColor="@color/colortext"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/linkScb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/scbEasy"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/sfprotext_regular"
+                    android:text="@string/unlink"
+                    android:textColor="@color/pinkPrimary"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/kplusRow"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/paymentMethod"
+                android:layout_marginTop="124dp"
+                android:layout_centerHorizontal="true"
+
+                >
+
+                <TextView
+                    android:id="@+id/checkKplus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/kPlus"
+                    android:drawableStart="@drawable/ic_check"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/sfprotext_regular"
+                    android:text="LINKED"
+                    android:textColor="@color/pinkPrimary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/kPlus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_toEndOf="@+id/checkKplus"
+                    android:fontFamily="@font/sfprotext_regular"
+                    android:text="K PLUS"
+                    android:textColor="@color/colortext"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/linkKplus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/kPlus"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/sfprotext_regular"
+                    android:text="@string/unlink"
+                    android:textColor="@color/pinkPrimary"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/trueMoneyRow"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/paymentMethod"
+                android:layout_marginTop="170dp"
+                android:layout_centerHorizontal="true"
+
+                >
+
+                <TextView
+                    android:id="@+id/checkTrueMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/trueMoney"
+                    android:drawableStart="@drawable/ic_check"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/sfprotext_regular"
+                    android:text="LINKED"
+                    android:textColor="@color/pinkPrimary"
+                    android:textSize="12sp"
+                    android:visibility="invisible"/>
+
+                <TextView
+                    android:id="@+id/trueMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_toEndOf="@+id/checkTrueMoney"
+                    android:fontFamily="@font/sfprotext_regular"
+                    android:text="K PLUS"
+                    android:textColor="@color/colortext"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/linkTrueMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/trueMoney"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/sfprotext_semibold"
+                    android:text="LINK"
+                    android:textColor="@color/pinkPrimary"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

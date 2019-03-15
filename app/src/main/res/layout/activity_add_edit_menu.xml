@@ -122,7 +122,7 @@
 
         <Button
             android:id="@+id/backButton"
-            android:layout_width="120dp"
+            android:layout_width="170dp"
             android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
@@ -190,7 +190,10 @@
             android:text=""
             android:checked="true"
             android:textOff="OUT OF STOCK"
-            android:textOn="AVAILABLE"/>
+            android:textOn="AVAILABLE"
+
+            android:scaleX="2"
+            android:scaleY="2"/>
 
 
         <RelativeLayout
