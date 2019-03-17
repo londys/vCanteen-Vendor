@@ -1,16 +1,23 @@
 package com.example.vcanteenvendor;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,12 +112,17 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
         //////////////////////////////////////////   Order Adapter   //////////////////////////////////////
 
         String[] test = {"Fried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky Rice","Fried Chicken with Sticky RiceFried Chicken with Sticky Rice","Food3","Food4","Fried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky Rice","Food6"};
         ListAdapter testAdapter = new OrderAdapter(this, test);
         ListView orderlist = findViewById(R.id.orderlist);
         orderlist.setAdapter(testAdapter);
+
+
+
 
 
 
@@ -137,6 +149,23 @@ public class MainActivity extends AppCompatActivity {
     public void goToSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if ( v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent( event );
     }
 
 }
