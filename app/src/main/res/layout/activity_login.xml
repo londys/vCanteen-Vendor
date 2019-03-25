@@ -91,7 +91,8 @@
         android:textColor="#ffffff"
         android:layout_marginTop="48dp"
         android:background="@drawable/pink_round_btn"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_marginLeft="50dp"
+        android:translationZ="2dp"/>
 
     <View
         android:id="@+id/divider"
@@ -137,5 +138,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.5"
-        android:background="@drawable/heroImage"/>
+        android:background="@drawable/heroimage"/>
 </LinearLayout>
