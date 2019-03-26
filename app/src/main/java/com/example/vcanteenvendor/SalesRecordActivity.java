@@ -171,7 +171,7 @@ public class SalesRecordActivity extends AppCompatActivity {
         listView.setAdapter(itemsAdapter);
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://heroku/vcanteenvendor/v1/sales-record/vendor/sales";
+        String url = "vcanteen.herokuapp.com/v1/sales-record/vendor/sales";
 
         JSONObject postparams = new JSONObject();
         try {
@@ -216,11 +216,11 @@ public class SalesRecordActivity extends AppCompatActivity {
                             for(int i=0;i<response.length();i++) {
                                 JSONObject foodObject = foodArray.getJSONObject(i);
                                 int orderId = foodObject.getInt("orderId");
-                                String food_name_appended = foodObject.getString("food_name_appended");
+                                String order_name = foodObject.getString("order_name");
                                 String food_extra_appended = foodObject.getString("food_extra_appended");
                                 int order_price = foodObject.getInt("order_price");
 
-                                SalesRecordArrayList neworder = new SalesRecordArrayList(Integer.toString(orderId), food_name_appended,food_extra_appended,Integer.toString(order_price));
+                                SalesRecordArrayList neworder = new SalesRecordArrayList(Integer.toString(orderId), order_name,food_extra_appended,Integer.toString(order_price));
                                 itemsAdapter.add(neworder);
 
 
