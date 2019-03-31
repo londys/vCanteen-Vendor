@@ -165,7 +165,7 @@
     <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="2dp"
         android:background="?android:attr/listDivider" />
 
     <LinearLayout
@@ -224,7 +224,7 @@
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="14dp"
                 android:singleLine="true"
-                android:text="E-san Food"
+                android:text="vendorName"
                 android:textColor="#333333"
                 android:textColorHint="#E0E0E0"
                 android:textSize="18sp" />
@@ -246,7 +246,7 @@
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="14dp"
                 android:singleLine="true"
-                android:text="john.doe@email.com"
+                android:text="vendorEmail"
                 android:textColor="#333333"
                 android:textColorHint="#E0E0E0"
                 android:textSize="18sp" />
@@ -369,6 +369,7 @@
                     android:fontFamily="@font/sfprotext_regular"
                     android:textSize="12sp"
                     android:layout_alignBaseline="@+id/cuNex"
+                    android:visibility="invisible"
                     />
 
                 <TextView
@@ -417,7 +418,8 @@
                     android:fontFamily="@font/sfprotext_regular"
                     android:text="LINKED"
                     android:textColor="@color/pinkPrimary"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:visibility="invisible"/>
 
                 <TextView
                     android:id="@+id/scbEasy"
@@ -464,7 +466,8 @@
                     android:fontFamily="@font/sfprotext_regular"
                     android:text="LINKED"
                     android:textColor="@color/pinkPrimary"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:visibility="invisible"/>
 
                 <TextView
                     android:id="@+id/kPlus"
