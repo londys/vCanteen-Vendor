@@ -22,6 +22,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -117,17 +123,61 @@ public class MainActivity extends AppCompatActivity {
         //////////////////////////////////////////   Order Adapter   //////////////////////////////////////
 
         String[] test = {"Fried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky Rice","Fried Chicken with Sticky RiceFried Chicken with Sticky Rice","Food3","Food4","Fried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky Rice","Food6"};
-        ListAdapter testAdapter = new OrderAdapter(this, test);
+
+        List<Order> orderList = new ArrayList<Order>();
+
+        ListAdapter testAdapter = new OrderAdapter(this, orderList); //Put the arraylist here
         ListView orderlist = findViewById(R.id.orderlist);
         orderlist.setAdapter(testAdapter);
 
 
-
+        //orderLoadUp();
 
 
 
     }
 
+    private void orderLoadUp() {
+
+        String url="https://api.jsonbin.io/b/";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        Call<List<Order>> call = jsonPlaceHolderApi.getOrders(1,"COOKING");
+
+        call.enqueue(new Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                    //vendorNameInput.setText("Code: " + response.code());
+                    return;
+                }
+
+                List<Order> orders = response.body();
+
+                /*Vendor vendor = response.body();
+                vendorNameInput.setText(vendor.getVendorName());
+                vendorEmailInput.setText(vendor.getVendorEmail());*/
+                // System.out.println("THE VENDOR NAME ISSS "+vendor.getVendorName());
+            }
+
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+    }
 
 
     //////////////////////////////////////////   Navigation(cont.)   //////////////////////////////////////

@@ -18,25 +18,36 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class OrderAdapter extends ArrayAdapter {
 
 
 
-    OrderAdapter(Context context, String[] a){
+    OrderAdapter(Context context, List<Order> orderList){
 
-        super(context, R.layout.order_row_relative , a);
+        super(context, R.layout.order_row_relative , orderList);
+    }
+
+    OrderAdapter(Context context, String[] orderList){
+
+        super(context, R.layout.order_row_relative , orderList);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
+
         LayoutInflater orderInflater = LayoutInflater.from(getContext());
         View customView = orderInflater.inflate(R.layout.order_row_relative, parent, false);
 
-        String singleItem = (String) getItem(position);
+        //String singleItem = (String) getItem(position);
+        Order singleItem = (Order) getItem(position);
+
         final TextView foodname = (TextView) customView.findViewById(R.id.foodName);
         TextView foodextra = (TextView) customView.findViewById(R.id.foodExtra);
-
         final Button cancelButton = (Button) customView.findViewById(R.id.cancelButton);
+
+
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,8 +133,8 @@ public class OrderAdapter extends ArrayAdapter {
 
 
 
-        foodname.setText(singleItem);
-        foodextra.setText(singleItem);
+        foodname.setText(singleItem.getOrderName());
+        foodextra.setText(singleItem.getOrderNameExtra());
         return customView;
     }
 
