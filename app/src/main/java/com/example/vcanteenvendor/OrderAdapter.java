@@ -24,15 +24,15 @@ public class OrderAdapter extends ArrayAdapter {
 
 
 
-    OrderAdapter(Context context, List<Order> orderList){
+    OrderAdapter(Context context, OrderList List){
 
-        super(context, R.layout.order_row_relative , orderList);
+        super(context, R.layout.order_row_relative , List.orderList);
     }
 
-    OrderAdapter(Context context, String[] orderList){
+    /*OrderAdapter(Context context, String[] orderList){
 
         super(context, R.layout.order_row_relative , orderList);
-    }
+    }*/
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
@@ -40,14 +40,16 @@ public class OrderAdapter extends ArrayAdapter {
         LayoutInflater orderInflater = LayoutInflater.from(getContext());
         View customView = orderInflater.inflate(R.layout.order_row_relative, parent, false);
 
-        //String singleItem = (String) getItem(position);
-        Order singleItem = (Order) getItem(position);
+        //String singleOrder = (String) getItem(position);
+        Order singleOrder = (Order) getItem(position);
 
         final TextView foodname = (TextView) customView.findViewById(R.id.foodName);
         TextView foodextra = (TextView) customView.findViewById(R.id.foodExtra);
         final Button cancelButton = (Button) customView.findViewById(R.id.cancelButton);
 
 
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,10 +133,12 @@ public class OrderAdapter extends ArrayAdapter {
             }
         });
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-        foodname.setText(singleItem.getOrderName());
-        foodextra.setText(singleItem.getOrderNameExtra());
+
+        foodname.setText(singleOrder.getOrderName());
+        foodextra.setText(singleOrder.getOrderNameExtra());
         return customView;
     }
 

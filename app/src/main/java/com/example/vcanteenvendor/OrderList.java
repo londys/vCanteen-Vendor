@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class OrderList {
+public class OrderList {  //สร้างครอบไว้อีกชั้น
 
-    @SerializedName("orderList")
+    @SerializedName("orderList") //jsonarray name
     List<Order> orderList;
 
     public OrderList(List<Order> orderList) {
@@ -28,7 +28,7 @@ public class OrderList {
                 '}';
     }
 
-    public String getEachOrder() {
+    public String getEachOrder() { // JUst for testing
         String content="";
         for (Order order: orderList){
             content += order.getOrderName()+" - ";

@@ -42,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
     TextView foodName;
     TextView foodExtra;
 
+    ListView orderListListView;
+
+    List<Order> orderList;
+    OrderList List;
 
 
 
@@ -64,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         orderNo = (TextView) findViewById(R.id.orderNo);
         foodName = (TextView) findViewById(R.id.foodName);
         foodExtra = (TextView) findViewById(R.id.foodExtra);
+
+        orderListListView = findViewById(R.id.orderlist);
 
         //set fonts from assets here
         /*Typeface light = Typeface.createFromAsset(getAssets(),"fonts/SF-Pro-Text-Light.otf");
@@ -122,16 +128,14 @@ public class MainActivity extends AppCompatActivity {
 
         //////////////////////////////////////////   Order Adapter   //////////////////////////////////////
 
-        String[] test = {"Fried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky Rice","Fried Chicken with Sticky RiceFried Chicken with Sticky Rice","Food3","Food4","Fried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky Rice","Food6"};
+        //String[] test = {"Fried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky Rice","Fried Chicken with Sticky RiceFried Chicken with Sticky Rice","Food3","Food4","Fried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky Rice","Food6"};
 
-        List<Order> orderList = new ArrayList<Order>();
+        List = new OrderList(orderList);
 
-        ListAdapter testAdapter = new OrderAdapter(this, orderList); //Put the arraylist here
-        ListView orderlist = findViewById(R.id.orderlist);
-        orderlist.setAdapter(testAdapter);
+        orderLoadUp(); //GET DATA FROM JSON
 
-
-        //orderLoadUp();
+        /*ListAdapter testAdapter = new OrderAdapter(this, List); //Put the arraylist here
+        orderListListView.setAdapter(testAdapter);*/
 
 
 
@@ -139,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void orderLoadUp() {
 
-        String url="https://api.jsonbin.io/b/";
+        String url="https://vcanteen.herokuapp.com/";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -148,31 +152,30 @@ public class MainActivity extends AppCompatActivity {
 
 
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        Call<List<Order>> call = jsonPlaceHolderApi.getOrders(1,"COOKING");
 
-        call.enqueue(new Callback<List<Order>>() {
+        Call<OrderList> call = jsonPlaceHolderApi.getOrder(1); //SET LOGIC TO INSERT ID HERE
+
+
+        call.enqueue(new Callback<OrderList>() {
             @Override
-            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+            public void onResponse(Call<OrderList> call, Response<OrderList> response) {
 
                 if (!response.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), "Code: " + response.code(), Toast.LENGTH_SHORT).show();
-                    //vendorNameInput.setText("Code: " + response.code());
+                    System.out.println("\n\n\n\n********************"+ "Code: " + response.code() +"********************\n\n\n\n");
                     return;
                 }
 
-                List<Order> orders = response.body();
+                List = response.body();
+                ListAdapter testAdapter = new OrderAdapter(MainActivity.this, List); //Put the arraylist here
+                orderListListView.setAdapter(testAdapter);
 
-                /*Vendor vendor = response.body();
-                vendorNameInput.setText(vendor.getVendorName());
-                vendorEmailInput.setText(vendor.getVendorEmail());*/
-                // System.out.println("THE VENDOR NAME ISSS "+vendor.getVendorName());
+
             }
 
             @Override
-            public void onFailure(Call<List<Order>> call, Throwable t) {
-
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-
+            public void onFailure(Call<OrderList> call, Throwable t) {
+                //vendorProfile.setText(t.getMessage());
+                System.out.println("\n\n\n\n********************"+ t.getMessage() +"********************\n\n\n\n");
 
             }
         });
