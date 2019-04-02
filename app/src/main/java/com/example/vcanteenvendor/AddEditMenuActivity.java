@@ -3,14 +3,23 @@ package com.example.vcanteenvendor;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 public class AddEditMenuActivity extends AppCompatActivity {
 
@@ -22,6 +31,17 @@ public class AddEditMenuActivity extends AppCompatActivity {
     Button backButton;
     Button deleteMenuButton;
     Switch toggle;
+
+    RadioGroup foodTypeRadioGroup;
+    RadioButton combiMainRadio;
+    RadioButton combiBaseRadio;
+    RadioButton alacarteRadio;
+    TextInputLayout nameInputLayout;
+    TextInputEditText nameInput;
+    ImageView uploadImage;
+    EditText priceInput;
+
+    RequestOptions option = new RequestOptions().centerCrop();;
 
 
     @Override
@@ -38,6 +58,56 @@ public class AddEditMenuActivity extends AppCompatActivity {
         backButton = (Button) findViewById(R.id.backButton);
         deleteMenuButton = (Button) findViewById(R.id.deleteMenuButton);
         toggle = (Switch)findViewById(R.id.availabilityToggle);
+
+        foodTypeRadioGroup = findViewById(R.id.foodTypeRadioGroup);
+        combiMainRadio = findViewById(R.id.combiMainRadio);
+        combiBaseRadio = findViewById(R.id.combiBaseRadio);
+        alacarteRadio = findViewById(R.id.alacarteRadio);
+        nameInputLayout = (TextInputLayout) findViewById(R.id.nameInputLayout);
+        nameInput = findViewById(R.id.nameInput);
+        uploadImage = findViewById(R.id.uploadImage);
+        priceInput= findViewById(R.id.priceInput);
+
+
+
+        //////////////////////////////////////////   Retrieve every info from menu   //////////////////////////////////////
+
+        nameInput.setText(getIntent().getStringExtra("foodName"));
+        priceInput.setText(String.valueOf(getIntent().getIntExtra("price",0)));
+
+        if(getIntent().getStringExtra("foodImageUrl") != null)
+        Glide.with(this).load(getIntent().getStringExtra("foodImageUrl")).apply(option).into(uploadImage);
+
+        String foodType = getIntent().getStringExtra("foodType");
+
+        if(foodType != null) {
+            foodTypeRadioGroup.clearCheck();
+            if(foodType.equals("ALACARTE")){
+                alacarteRadio.setChecked(true);
+
+            } else if (foodType.equals("COMBINATION_BASE")){
+                combiBaseRadio.setChecked(true);
+
+            } else if (foodType.equals("COMBINATION_MAIN")){
+                combiMainRadio.setChecked(true);
+
+            }
+        }
+
+        String foodStatus = getIntent().getStringExtra("foodStatus");
+
+        if(foodStatus != null){
+            if(foodStatus.equals("AVAILABLE")){
+                toggle.setChecked(true);
+
+            } else if(foodStatus.equals("SOLD_OUT")){
+                toggle.setChecked(false);
+
+            }
+        }
+
+
+
 
 
 

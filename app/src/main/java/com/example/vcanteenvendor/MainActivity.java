@@ -44,8 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
     ListView orderListListView;
 
-    List<Order> orderList;
     OrderList List;
+    List<Order> orderList;
+
 
 
 

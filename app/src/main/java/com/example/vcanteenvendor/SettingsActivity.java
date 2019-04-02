@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,10 +59,15 @@ public class SettingsActivity extends AppCompatActivity {
     TextView checkKplus;
     TextView checkTrueMoney;
 
+    ImageView vendorProfilePicture;
+
     private RequestQueue mQueue;
     private String url="FROM ENDPOINTS";
 
-    Vendor vendor = new Vendor();
+    Vendor vendor;
+    VendorInfoArray vendorInfoArray;
+
+    RequestOptions option = new RequestOptions().centerCrop();
 
 
     @Override
@@ -87,19 +95,18 @@ public class SettingsActivity extends AppCompatActivity {
         checkKplus = (TextView) findViewById(R.id.checkKplus);
         checkTrueMoney = (TextView) findViewById(R.id.checkTrueMoney);
 
+        vendorProfilePicture = findViewById(R.id.vendorProfilePicture);
+
 
         //////////////////////////////////////////   JSON START UP   //////////////////////////////////////
 
 
 
         //mQueue = Volley.newRequestQueue(this);
-        //accountJSONLoadUp(url);
 
 
-        //accountJSONLoadUp();
-        //testPut();
 
-        testGet();
+        accountJSONLoadUp();
 
 
 
@@ -236,50 +243,9 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-
-
-
     }
 
-    private void testGet() {
 
-        url="https://vcanteen.herokuapp.com/";
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        Call<OrderList> call = jsonPlaceHolderApi.getOrder(1);
-
-        call.enqueue(new Callback<OrderList>() {
-            @Override
-            public void onResponse(Call<OrderList> call, Response<OrderList> response) {
-
-                if (!response.isSuccessful()) {
-                    vendorNameInput.setText("Code: " + response.code());
-                    return;
-                }
-
-                OrderList orderList = response.body();
-                vendorProfile.append(orderList.getEachOrder());
-                /*vendorNameInput.setText(vendor.getVendorName());
-                vendorEmailInput.setText(vendor.getVendorEmail());*/
-
-
-            }
-
-            @Override
-            public void onFailure(Call<OrderList> call, Throwable t) {
-                vendorProfile.setText(t.getMessage());
-                System.out.println("\n\n\n\n********************"+ t.getMessage() +"********************\n\n\n\n");
-
-            }
-        });
-
-    }
 
     private void testPut() {
 
@@ -330,7 +296,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void accountJSONLoadUp() {
 
-        url="https://api.jsonbin.io/";
+        url="https://vcanteen.herokuapp.com/";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -339,24 +305,50 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        Call<Vendor> call = jsonPlaceHolderApi.getVendor(1);
+        Call<VendorInfoArray> call = jsonPlaceHolderApi.getVendorInfo(1);
 
-        call.enqueue(new Callback<Vendor>() {
+        call.enqueue(new Callback<VendorInfoArray>() {
             @Override
-            public void onResponse(Call<Vendor> call, Response<Vendor> response) {
+            public void onResponse(Call<VendorInfoArray> call, Response<VendorInfoArray> response) {
 
                 if (!response.isSuccessful()) {
                     vendorNameInput.setText("Code: " + response.code());
                     return;
                 }
 
-                vendor = response.body();
-                vendorNameInput.setText(vendor.getVendorName());
-                vendorEmailInput.setText(vendor.getVendorEmail());
+                vendorInfoArray = response.body();
 
-                if(vendor.findServiceProviderFromList(vendor.getVendorPaymentMethod(), "CU_NEX")){
+
+                if (vendorInfoArray != null){
+
+                    vendor = vendorInfoArray.vendorInfo.get(0);
+                    vendorNameInput.setText(vendor.getVendorName());
+                    vendorEmailInput.setText(vendor.getVendorEmail());
+                    Glide.with(SettingsActivity.this).load(vendor.getVendorImage()).apply(option).into(vendorProfilePicture);
+                    //This array always have 1 member, so use get(1).
+
+                } else {
+                    vendorNameInput.setText("Receive Null");
+                }
+
+                if(vendorInfoArray.findServiceProviderFromList(vendorInfoArray.getVendorPaymentMethod(), "CU_NEX")){
                     checkCUNex.setVisibility(View.VISIBLE);
-                    //vendorProfile.setText(vendor.getVendorPaymentMethod().toString());
+                }
+
+                if(vendorInfoArray.findServiceProviderFromList(vendorInfoArray.getVendorPaymentMethod(), "SCB_EASY")){
+                    checkScb.setVisibility(View.VISIBLE);
+                }
+
+                if(vendorInfoArray.findServiceProviderFromList(vendorInfoArray.getVendorPaymentMethod(), "K_PLUS")){
+                    checkKplus.setVisibility(View.VISIBLE);
+                }
+
+                if(vendorInfoArray.findServiceProviderFromList(vendorInfoArray.getVendorPaymentMethod(), "TRUEMONEY_WALLET")){
+                    checkTrueMoney.setVisibility(View.VISIBLE);
+                }
+
+                /*if(vendor.findServiceProviderFromList(vendor.getVendorPaymentMethod(), "CU_NEX")){
+                    checkCUNex.setVisibility(View.VISIBLE);
                 }
 
                 if(vendor.findServiceProviderFromList(vendor.getVendorPaymentMethod(), "SCB_EASY")){
@@ -369,13 +361,13 @@ public class SettingsActivity extends AppCompatActivity {
 
                 if(vendor.findServiceProviderFromList(vendor.getVendorPaymentMethod(), "TRUEMONEY_WALLET")){
                     checkTrueMoney.setVisibility(View.VISIBLE);
-                }
+                }*/
 
 
             }
 
             @Override
-            public void onFailure(Call<Vendor> call, Throwable t) {
+            public void onFailure(Call<VendorInfoArray> call, Throwable t) {
                 vendorProfile.setText(t.getMessage());
                 //System.out.println("\n\n\n\n"+ t.getMessage() +"\n\n\n\n");
 
