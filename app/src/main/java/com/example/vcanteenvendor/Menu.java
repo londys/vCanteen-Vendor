@@ -1,0 +1,83 @@
+package com.example.vcanteenvendor;
+
+import com.google.gson.annotations.SerializedName;
+
+public class Menu {
+
+    @SerializedName("foodName")
+    private String foodName;
+
+    @SerializedName("price")
+    private int foodPrice;
+
+    @SerializedName("foodId")
+    private int foodId;
+
+    @SerializedName("foodImageUrl")
+    private String foodImg;
+
+    @SerializedName("foodStatus")
+    private String foodStatus;
+
+    @SerializedName("foodType")
+    private String foodType;
+
+
+
+
+    /////////////////////////////////////  GETTER SETTER CONSTRUCTOR  //////////////////////////////
+
+    public String getFoodImg() {
+        return foodImg;
+    }
+
+    public void setFoodImg(String foodImg) {
+        this.foodImg = foodImg;
+    }
+
+    public Menu(){
+
+    }
+
+    public String getFoodStatus() {
+        return foodStatus;
+    }
+
+    public void setFoodStatus(String foodStatus) {
+        this.foodStatus = foodStatus;
+    }
+
+    public String getFoodType() {
+        return foodType;
+    }
+
+    public void setFoodType(String foodType) {
+        this.foodType = foodType;
+    }
+
+    public String getFoodName() {
+        return foodName;
+    }
+
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
+    }
+
+    public int getFoodPrice() {
+        return foodPrice;
+    }
+
+    public void setFoodPrice(int foodPrice) {
+        this.foodPrice = foodPrice;
+    }
+
+    public int getFoodId() {
+        return foodId;
+    }
+
+    public void setFoodId(int foodId) {
+        this.foodId = foodId;
+    }
+
+
+}

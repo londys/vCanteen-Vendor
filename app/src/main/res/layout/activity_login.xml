@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    android:orientation="vertical"
+    android:layout_weight="0.5">
+
+    <ImageView
+        android:id="@+id/vcanteenlogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_vcanteen_logo"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vendor Login"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:textSize="28dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginLeft="40dp"/>
+
+        <LinearLayout
+            android:id="@+id/emailbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textColor="@color/colortext"
+                android:fontFamily="@font/sfprotext_semibold"
+                android:textSize="24dp"
+                />
+
+            <EditText
+                android:id="@+id/email_field"
+                android:layout_width="490dp"
+                android:layout_height="wrap_content"
+                android:hint="Enter your email..."
+                android:layout_marginTop="30dp" />
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/passwordbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textColor="@color/colortext"
+            android:fontFamily="@font/sfprotext_semibold"
+            android:textSize="24dp"
+            />
+
+        <EditText
+            android:id="@+id/password_field"
+            android:layout_width="490dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:text="LOGIN"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:textSize="28dp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/pink_round_btn"
+        android:layout_marginLeft="50dp"
+        android:translationZ="2dp"/>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="490dp"
+        android:layout_height="0.2dp"
+        android:background="?android:attr/listDivider"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="24dp"/>
+
+
+    <Button
+        android:id="@+id/facebook_button"
+        android:layout_width="490dp"
+        android:layout_height="60dp"
+        android:text="Sign in with Facebook"
+        android:layout_gravity="center_horizontal"
+        android:textAllCaps="false"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:textSize="22dp"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:background="@drawable/button_facebook"
+        />
+
+
+
+    <Button
+        android:id="@+id/forgot_pw_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot Password?"
+        android:textAllCaps="false"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="24dp"
+        android:textSize="22dp"
+        android:textColor="#7BCAE8"
+        android:background="?android:attr/selectableItemBackground"/>
+</LinearLayout>
+
+    <ImageView
+        android:id="@+id/chefpic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:background="@drawable/heroimage"/>
+</LinearLayout>
