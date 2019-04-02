@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Vendor {
 
-    @SerializedName("vendor_id")
+    @SerializedName("vendorId")
     private int vendorId;
 
     @SerializedName("adminPermission")
@@ -27,16 +27,14 @@ public class Vendor {
     @SerializedName("vendorPassword")
     private String vendorPassword;
 
-    @SerializedName("vendorAccountType")
+    @SerializedName("accountType")
     private String vendorAccountType;
 
     @SerializedName("vendorEmail")
     private String vendorEmail;
 
-    @SerializedName("vendorPaymentMethod")
-    private List<ServiceProvider> vendorPaymentMethod;
 
-    public Vendor(int vendorId, String adminPermission, int vendorNo, String vendorName, String vendorStatus, String vendorImage, String vendorPassword, String vendorAccountType, String vendorEmail, List<ServiceProvider> vendorPaymentMethod) {
+    public Vendor(int vendorId, String adminPermission, int vendorNo, String vendorName, String vendorStatus, String vendorImage, String vendorPassword, String vendorAccountType, String vendorEmail) {
         this.vendorId = vendorId;
         this.adminPermission = adminPermission;
         this.vendorNo = vendorNo;
@@ -46,31 +44,12 @@ public class Vendor {
         this.vendorPassword = vendorPassword;
         this.vendorAccountType = vendorAccountType;
         this.vendorEmail = vendorEmail;
-        this.vendorPaymentMethod = vendorPaymentMethod;
     }
 
     public Vendor() {
     }
 
-    public Boolean findServiceProviderFromList(List<ServiceProvider> vendorPaymentMethod, String account) {
 
-        for (ServiceProvider serviceProvider : vendorPaymentMethod) {
-            if (serviceProvider.getAccount().equals(account)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-
-    public List<ServiceProvider> getVendorPaymentMethod() {
-        return vendorPaymentMethod;
-    }
-
-    public void setVendorPaymentMethod(List<ServiceProvider> vendorPaymentMethod) {
-        this.vendorPaymentMethod = vendorPaymentMethod;
-    }
 
     public int getVendorId() {
         return vendorId;

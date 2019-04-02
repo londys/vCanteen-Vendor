@@ -157,7 +157,7 @@
             android:layout_marginEnd="32dp"
             android:layout_centerVertical="true"
             android:text="save"
-            android:background="@drawable/button_pink_rounded"
+            android:background="@drawable/pink_round_btn"
             android:fontFamily="@font/sfprotext_bold"
             android:textColor="#ffffff"
             android:textSize="16sp"/>
@@ -170,8 +170,8 @@
         android:layout_height="match_parent">
 
 
-        <Button
-            android:id="@+id/uploadImageButton"
+        <ImageView
+            android:id="@+id/uploadImage"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
 
@@ -189,7 +189,7 @@
             android:layout_marginStart="120dp"
             android:layout_marginTop="64dp"
 
-            android:layout_toEndOf="@id/uploadImageButton"
+            android:layout_toEndOf="@id/uploadImage"
             android:fontFamily="@font/sfprotext_semibold"
             android:text="Menu Availability"
             android:textColor="#4F4F4F"
@@ -199,13 +199,13 @@
             android:id="@+id/availabilityToggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/uploadImageButton"
+            android:layout_toEndOf="@id/uploadImage"
             android:layout_below="@id/menuAvailabilityLabel"
             android:layout_marginStart="120dp"
             android:layout_marginTop="16dp"
             android:text=""
             android:checked="true"
-            android:textOff="OUT OF STOCK"
+            android:textOff="SOLD_OUT"
             android:textOn="AVAILABLE"
 
             android:scaleX="1.5"
@@ -213,24 +213,25 @@
 
 
         <RelativeLayout
-            android:layout_width="310dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="56dp"
             android:id="@+id/radioButtons"
-            android:layout_below="@id/uploadImageButton"
+            android:layout_below="@id/uploadImage"
             android:layout_centerHorizontal="true">
 
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/foodTypeRadioGroup">
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/combiMainRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Combination"
+                    android:text="Combination Main"
                     android:layout_marginStart="8dp"
                     android:buttonTint="@color/pinkPrimary"
                     android:checked="true"
@@ -242,15 +243,27 @@
                     />
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/combiBaseRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Combination Base"
+                    android:layout_marginStart="26dp"
+                    android:buttonTint="@color/pinkPrimary"
+
+                    android:textColor="@color/colortext"
+                    android:fontFamily="@font/sfprotext_regular"
+                    android:textSize="18sp"
+                    />
+
+                <RadioButton
+                    android:id="@+id/alacarteRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="A La Carte"
                     android:layout_marginStart="26dp"
                     android:buttonTint="@color/pinkPrimary"
-
-
 
                     android:textColor="@color/colortext"
                     android:fontFamily="@font/sfprotext_regular"
@@ -261,7 +274,7 @@
 
 
         <android.support.design.widget.TextInputLayout
-            android:layout_width="310dp"
+            android:layout_width="540dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/radioButtons"
             android:layout_marginTop="24dp"
@@ -300,7 +313,7 @@
 
         <EditText
             android:id="@+id/priceInput"
-            android:layout_width="310dp"
+            android:layout_width="540dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/nameInputLayout"
             android:layout_marginTop="24dp"
@@ -325,7 +338,7 @@
             android:id="@+id/typeInputLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/uploadImageButton"
+            android:layout_below="@+id/uploadImage"
             android:layout_marginTop="62dp"
             android:layout_marginEnd="44dp"
             android:layout_toStartOf="@+id/radioButtons"

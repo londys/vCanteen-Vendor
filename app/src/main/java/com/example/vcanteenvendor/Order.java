@@ -19,16 +19,16 @@ public class Order {
     @SerializedName("orderCustomerId")
     private int orderCustomerId;
 
-    @SerializedName("created_at")
+    @SerializedName("timestamp")
     private String createdAt;
 
     @SerializedName("vendorId")
     private int vendorId;
 
-    @SerializedName("order_name")
+    @SerializedName("orderName")
     private String orderName;
 
-    @SerializedName("order_name_extra")
+    @SerializedName("orderNameExtra")
     private String orderNameExtra;
 
     @SerializedName("transactionId")
