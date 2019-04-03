@@ -205,7 +205,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/button_white_rounded"
-                app:srcCompat="@drawable/vendor_profile" />
+                app:srcCompat="@drawable/img_loading" />
 
             <EditText
                 android:id="@+id/vendorNameInput"
@@ -224,7 +224,7 @@
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="14dp"
                 android:singleLine="true"
-                android:text="vendorName"
+                android:text="Loading..."
                 android:textColor="#333333"
                 android:textColorHint="#E0E0E0"
                 android:textSize="18sp" />
@@ -246,7 +246,7 @@
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="14dp"
                 android:singleLine="true"
-                android:text="vendorEmail"
+                android:text="Loading..."
                 android:textColor="#333333"
                 android:textColorHint="#E0E0E0"
                 android:textSize="18sp" />

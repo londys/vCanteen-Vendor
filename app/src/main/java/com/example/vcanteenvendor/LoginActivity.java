@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,5 +28,9 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
+
+        ImageView chefpic = findViewById(R.id.chefpic);
+        RequestOptions option = new RequestOptions().centerCrop();
+        Glide.with(LoginActivity.this).load(R.drawable.hero_image).apply(option).into(chefpic);
     }
 }
