@@ -13,7 +13,7 @@ public class Menu {
     @SerializedName("foodId")
     private int foodId;
 
-    @SerializedName("foodImageUrl")
+    @SerializedName("foodImage")
     private String foodImg;
 
     @SerializedName("foodStatus")
@@ -45,6 +45,15 @@ public class Menu {
 
     public void setFoodStatus(String foodStatus) {
         this.foodStatus = foodStatus;
+    }
+
+    public Menu(int foodId, String foodName, int foodPrice, String foodStatus,  String foodImg, String foodType) {
+        this.foodName = foodName;
+        this.foodPrice = foodPrice;
+        this.foodId = foodId;
+        this.foodImg = foodImg;
+        this.foodStatus = foodStatus;
+        this.foodType = foodType;
     }
 
     public String getFoodType() {

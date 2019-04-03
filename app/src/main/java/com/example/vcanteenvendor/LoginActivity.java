@@ -42,6 +42,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -351,5 +355,9 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        ImageView chefpic = findViewById(R.id.chefpic);
+        RequestOptions option = new RequestOptions().centerCrop();
+        Glide.with(LoginActivity.this).load(R.drawable.hero_image).apply(option).into(chefpic);
     }
 }

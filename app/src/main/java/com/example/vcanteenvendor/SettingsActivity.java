@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -187,12 +188,13 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-        vendorStatusToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        vendorStatusToggle.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+            public void onClick(View v) {
 
-                if(isChecked==false){
-
+                if(!vendorStatusToggle.isChecked()){
+                    vendorStatusToggle.setChecked(true);
 
 
                     final Dialog dialog = new Dialog(SettingsActivity.this);
@@ -202,7 +204,7 @@ public class SettingsActivity extends AppCompatActivity {
                     final TextView title = (TextView) dialog.findViewById(R.id.dialogTitle);
                     final TextView content = (TextView) dialog.findViewById(R.id.dialogContent);
                     Button negativeButton = (Button) dialog.findViewById(R.id.negativeButton);
-                    Button positiveButton = (Button) dialog.findViewById(R.id.positiveButton);
+                    final Button positiveButton = (Button) dialog.findViewById(R.id.positiveButton);
 
 
                     title.setText("Closing Menu");
@@ -223,10 +225,21 @@ public class SettingsActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
 
-                            Toast.makeText(getApplicationContext(), "MENU CLOSED!",  Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                            statusText.setText("CLOSED");
-                            statusText.setTextColor(Color.parseColor("#828282"));
+                            positiveButton.setBackgroundResource(R.drawable.button_grey_rounded);
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    vendorStatusToggle.setChecked(false);
+                                    openCloseVendor("CLOSE");
+                                    Toast.makeText(getApplicationContext(), "VENDOR CLOSED!",  Toast.LENGTH_SHORT).show();
+                                    positiveButton.setBackgroundResource(R.drawable.button_red_rounded);
+                                    dialog.dismiss();
+                                    statusText.setText("CLOSED");
+                                    statusText.setTextColor(Color.parseColor("#828282"));
+
+                                }
+                            }, 2000);
 
                         }
                     });
@@ -235,6 +248,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                 } else {
 
+                    openCloseVendor("OPEN");
                     statusText.setText("OPEN");
                     statusText.setTextColor(getResources().getColor(R.color.pinkPrimary));
                 }
@@ -242,16 +256,11 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
+    private void openCloseVendor(String vendorStatus) {
 
-
-    private void testPut() {
-
-        url="https://api.jsonbin.io/";
-
-        vendor.setVendorEmail("kuy");
+        url="https://vcanteen.herokuapp.com/";
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -260,39 +269,30 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        Call<Vendor> call = jsonPlaceHolderApi.getVendor2(1, vendor);
+        Call<Void> call = jsonPlaceHolderApi.editVendorStatus(1, vendorStatus);
 
-        call.enqueue(new Callback<Vendor>() {
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Vendor> call, Response<Vendor> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
 
                 if (!response.isSuccessful()) {
                     vendorNameInput.setText("Code: " + response.code());
                     return;
                 }
 
-                vendor = response.body();
-                vendorNameInput.setText(vendor.getVendorName());
-                vendorEmailInput.setText(vendor.getVendorEmail());
-
-                /*if(vendor.findServiceProviderFromList(vendor.getVendorPaymentMethod())){
-                    checkCUNex.setVisibility(View.VISIBLE);
-                    vendorProfile.setText(vendor.getVendorPaymentMethod().toString());
-                }*/
-
 
             }
 
             @Override
-            public void onFailure(Call<Vendor> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 vendorProfile.setText(t.getMessage());
-                //System.out.println("\n\n\n\n"+ t.getMessage() +"\n\n\n\n");
+
 
             }
         });
 
-
     }
+
 
     private void accountJSONLoadUp() {
 
@@ -313,6 +313,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                 if (!response.isSuccessful()) {
                     vendorNameInput.setText("Code: " + response.code());
+                    vendorNameInput.setText("");
                     return;
                 }
 
@@ -331,6 +332,9 @@ public class SettingsActivity extends AppCompatActivity {
                     vendorNameInput.setText("Receive Null");
                 }
 
+
+
+
                 if(vendorInfoArray.findServiceProviderFromList(vendorInfoArray.getVendorPaymentMethod(), "CU_NEX")){
                     checkCUNex.setVisibility(View.VISIBLE);
                 }
@@ -347,21 +351,16 @@ public class SettingsActivity extends AppCompatActivity {
                     checkTrueMoney.setVisibility(View.VISIBLE);
                 }
 
-                /*if(vendor.findServiceProviderFromList(vendor.getVendorPaymentMethod(), "CU_NEX")){
-                    checkCUNex.setVisibility(View.VISIBLE);
-                }
 
-                if(vendor.findServiceProviderFromList(vendor.getVendorPaymentMethod(), "SCB_EASY")){
-                    checkScb.setVisibility(View.VISIBLE);
+                if(vendor.getVendorStatus().equals("OPEN")){
+                    vendorStatusToggle.setChecked(true);
+                    statusText.setText("OPEN");
+                    statusText.setTextColor(getResources().getColor(R.color.pinkPrimary));
+                }else{
+                    vendorStatusToggle.setChecked(false);
+                    statusText.setText("CLOSED");
+                    statusText.setTextColor(Color.parseColor("#828282"));
                 }
-
-                if(vendor.findServiceProviderFromList(vendor.getVendorPaymentMethod(), "K_PLUS")){
-                    checkKplus.setVisibility(View.VISIBLE);
-                }
-
-                if(vendor.findServiceProviderFromList(vendor.getVendorPaymentMethod(), "TRUEMONEY_WALLET")){
-                    checkTrueMoney.setVisibility(View.VISIBLE);
-                }*/
 
 
             }
@@ -369,51 +368,10 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<VendorInfoArray> call, Throwable t) {
                 vendorProfile.setText(t.getMessage());
-                //System.out.println("\n\n\n\n"+ t.getMessage() +"\n\n\n\n");
+
 
             }
         });
-
-        /*JSONObject postparams = new JSONObject();
-        try {
-            postparams.put("vendorID", "00001"); //vendorId get from other source later
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
-
-
-        /*JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("vendorPaymentMethod");
-
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject vendorPaymentMethod = jsonArray.getJSONObject(i);
-                                String account = vendorPaymentMethod.getString("account");
-
-
-                                *//*mTextViewResult.append(firstName + ", " + String.valueOf(age) + ", " + mail + "\n\n");*//*
-                            }
-
-
-                            vendorNameInput.setText(response.getString("vendorName"));
-                            vendorEmailInput.setText(response.getString("vendorEmail"));
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-
-        mQueue.add(request);*/
 
     }
 
@@ -436,12 +394,7 @@ public class SettingsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-   /* public void goToSettings() {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-    }*/
-
-   public void logOut(){
+    public void logOut(){
        Intent intent = new Intent(this, LoginActivity.class);
        startActivity(intent);
    }

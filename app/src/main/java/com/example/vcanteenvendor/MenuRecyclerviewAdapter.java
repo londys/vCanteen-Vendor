@@ -51,7 +51,7 @@ public class MenuRecyclerviewAdapter extends RecyclerView.Adapter<MenuRecyclervi
                 i.putExtra("foodId",mData.get(viewHolder.getAdapterPosition()).getFoodId());
                 i.putExtra("foodName",mData.get(viewHolder.getAdapterPosition()).getFoodName());
                 i.putExtra("price",mData.get(viewHolder.getAdapterPosition()).getFoodPrice());
-                i.putExtra("foodImageUrl",mData.get(viewHolder.getAdapterPosition()).getFoodImg());
+                i.putExtra("foodImage",mData.get(viewHolder.getAdapterPosition()).getFoodImg());
                 i.putExtra("foodStatus",mData.get(viewHolder.getAdapterPosition()).getFoodStatus());
                 i.putExtra("foodType",mData.get(viewHolder.getAdapterPosition()).getFoodType());
                 // start the activity
@@ -68,26 +68,16 @@ public class MenuRecyclerviewAdapter extends RecyclerView.Adapter<MenuRecyclervi
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
         holder.card_food_name.setText(mData.get(position).getFoodName());
-        //holder.card_food_price.setText(mData.get(position).getFoodPrice());
         holder.card_food_price.setText(String.format ("%d", mData.get(position).getFoodPrice()));
+
+        if (!mData.get(position).getFoodImg().equals(""))
         Glide.with(mContext).load(mData.get(position).getFoodImg()).apply(option).into(holder.menuImg); //Set image via url using Glide
-        //holder.menuImg.setImageResource(mData.get(position).getFoodImg());
 
-        /*holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if(mData.get(position).getFoodStatus().equals("SOLD_OUT")){
 
-                Intent intent = new Intent(mContext,Book_Activity.class);
-
-                // passing data to the book activity
-                intent.putExtra("Title",mData.get(position).getTitle());
-                intent.putExtra("Description",mData.get(position).getDescription());
-                intent.putExtra("Thumbnail",mData.get(position).getThumbnail());
-                // start the activity
-                mContext.startActivity(intent);
-
-            }
-        });*/
+            holder.filter.setVisibility(View.VISIBLE);
+            holder.soldOutLabel.setVisibility(View.VISIBLE);
+        }
 
 
 
@@ -105,6 +95,8 @@ public class MenuRecyclerviewAdapter extends RecyclerView.Adapter<MenuRecyclervi
         ImageView menuImg;
         RelativeLayout cardViewContainer;
         CardView cardView ;
+        TextView soldOutLabel;
+        ImageView filter;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -114,6 +106,8 @@ public class MenuRecyclerviewAdapter extends RecyclerView.Adapter<MenuRecyclervi
             menuImg = (ImageView) itemView.findViewById(R.id.menuImg);
             cardViewContainer = itemView.findViewById(R.id.cardViewContainer);
             cardView = (CardView) itemView.findViewById(R.id.cardview_id);
+            soldOutLabel = itemView.findViewById(R.id.soldOutLabel);
+            filter = itemView.findViewById(R.id.filter);
 
 
         }
