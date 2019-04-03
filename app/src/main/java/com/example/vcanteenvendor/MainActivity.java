@@ -165,11 +165,10 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("\n\n\n\n********************"+ "Code: " + response.code() +"********************\n\n\n\n");
                     return;
                 }
-
+                List = new OrderList(orderList);
                 List = response.body();
                 ListAdapter testAdapter = new OrderAdapter(MainActivity.this, List); //Put the arraylist here
                 orderListListView.setAdapter(testAdapter);
-
 
             }
 

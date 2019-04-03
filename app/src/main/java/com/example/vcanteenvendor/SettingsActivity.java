@@ -45,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
     Button menuButton; //MENU
     Button salesRecordButton; //SALES RECORD
     Button settingsButton; //SETTINGS
+    Button changePasswordButton;
 
     Button signOutButton;
     Switch vendorStatusToggle;
@@ -84,6 +85,7 @@ public class SettingsActivity extends AppCompatActivity {
         signOutButton=(Button) findViewById(R.id.signOutButton);
         vendorStatusToggle = (Switch) findViewById(R.id.vendorStatusToggle);
         statusText = (TextView) findViewById(R.id.statusText);
+        changePasswordButton = (Button) findViewById(R.id.changePasswordButton);
 
         vendorNameInput = (EditText) findViewById(R.id.vendorNameInput);
         vendorEmailInput = (EditText) findViewById(R.id.vendorEmailInput);
@@ -242,6 +244,21 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        changePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(SettingsActivity.this);
+                //dialog.setTitle("Devahoy");
+                dialog.setContentView(R.layout.change_password_dialog);
+                dialog.show();
+
+                Button close_dialog = (Button) dialog.findViewById(R.id.close_dialog);
+                TextView changePasswordTitle = (TextView)dialog.findViewById(R.id.changePasswordTitle);
+                TextView currentPassword = (TextView)dialog.findViewById(R.id.currentPassword);
+
+
+            }
+        });
 
     }
 

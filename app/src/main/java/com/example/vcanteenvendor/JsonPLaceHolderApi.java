@@ -23,6 +23,7 @@ interface JsonPlaceHolderApi {
     @GET("v1/menu-management/{vendorId}/menu")
     Call<CombinationAlacarteList> getAllMenu(@Path("vendorId") int vendorId);
 
+
     /*@FormUrlEncoded
     @POST("b/5c9c37331c56bb1ec38f9c67/2")
     Call<Vendor> getVendor(
