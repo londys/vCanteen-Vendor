@@ -42,10 +42,9 @@ interface JsonPlaceHolderApi {
                         @Field("foodType")String foodType,
                         @Field("foodImage") String foodImage);
 
-
-    @DELETE("v1/menu-management/vendorId/menu/foodId")
-    Call<Void> deleteMenu(@Query("vendorId") int vendorId,
-                          @Query("foodId") int foodId);
+    @DELETE("v1/menu-management/{vendorId}/menu/{foodId}")
+    Call<Void> deleteMenu(@Path("vendorId") int vendorId,
+                          @Path("foodId") int foodId);
 
     @FormUrlEncoded
     @PUT("v1/settings/vendorId/status")
