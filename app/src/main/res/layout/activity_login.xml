@@ -170,11 +170,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.5"
-<<<<<<< HEAD
         android:src="@drawable/heroimage"
-        android:scaleType="fitXY"
-        />
-=======
-        app:srcCompat="@drawable/heroimage" />
->>>>>>> 8b01b4e060c794e6f53abb4ef737f1e9ba3dd812
+        android:scaleType="fitXY"/>
 </LinearLayout>
