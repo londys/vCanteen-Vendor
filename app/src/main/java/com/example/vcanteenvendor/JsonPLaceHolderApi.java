@@ -33,4 +33,10 @@ interface JsonPlaceHolderApi {
     @PUT("b/5c9c37331c56bb1ec38f9c67/2")
     Call<Vendor> getVendor2(@Query("vendorID") int vendorId, @Body Vendor vendor);
 
+    @POST("v1/user-authentication/vendor/check/token")
+    Call<LoginResponse> sendLogin(@Body LoginVendor loginVendor);
+
+    @POST("v1/user-authentication/vendor/password/recover")
+    Call<Void> recoverPass(@Body RecoverPass recoverPass);
+
 }
