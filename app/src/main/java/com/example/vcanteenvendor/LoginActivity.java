@@ -187,10 +187,13 @@ public class LoginActivity extends AppCompatActivity {
                                         .addConverterFactory(GsonConverterFactory.create(gson))
                                         .build();
                                 final JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-                                Call<Void> call = jsonPlaceHolderApi.recoverPass(new RecoverPass(emailSent));
+                                RecoverPass postData = new RecoverPass(emailSent);
+                                System.out.println(postData.toString());
+                                Call<Void> call = jsonPlaceHolderApi.recoverPass(postData);
                                 call.enqueue(new Callback<Void>() {
                                     @Override
                                     public void onResponse(Call<Void> call, Response<Void> response) {
+                                        System.out.println(response.code());
                                         if (response.code() != 200) {
                                             // Error
                                             progressDialog.dismiss();

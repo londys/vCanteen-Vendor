@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -62,6 +63,23 @@ public class SettingsActivity extends AppCompatActivity {
 
     ImageView vendorProfilePicture;
 
+    Button changePass;
+    Dialog changePassDialog;
+
+    /// FOR CHANGEPASS DIALOG ///
+    EditText currPassBox;
+    EditText newPassBox;
+    EditText confirmNewPassBox;
+    Button confirmChangePass;
+
+    Button clearCurrPass;
+    Button clearNewPass;
+    Button clearConfirmPass;
+
+    TextView errorCurrPass;
+    TextView errorNewPass;
+    TextView errorConfirmPass;
+
     private RequestQueue mQueue;
     private String url="FROM ENDPOINTS";
 
@@ -98,6 +116,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         vendorProfilePicture = findViewById(R.id.vendorProfilePicture);
 
+
+        changePass = findViewById(R.id.changePasswordButton);
 
         //////////////////////////////////////////   JSON START UP   //////////////////////////////////////
 
@@ -252,6 +272,36 @@ public class SettingsActivity extends AppCompatActivity {
                     statusText.setText("OPEN");
                     statusText.setTextColor(getResources().getColor(R.color.pinkPrimary));
                 }
+
+            }
+        });
+
+        ///////////////////// CHANGE PASSWORD ////////////////////////
+        changePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changePassDialog = new Dialog(SettingsActivity.this);
+                changePassDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                changePassDialog.setContentView(R.layout.change_password_dialog);
+
+                currPassBox = changePassDialog.findViewById(R.id.currentPasswordBox);
+                newPassBox = changePassDialog.findViewById(R.id.newPasswordBox);
+                confirmNewPassBox = changePassDialog.findViewById(R.id.confirmNewPasswordBox);
+                confirmChangePass = changePassDialog.findViewById(R.id.confirmChangePasswordButton);
+
+                clearCurrPass = changePassDialog.findViewById(R.id.clearTextButtonCurrentPW);
+                clearNewPass = changePassDialog.findViewById(R.id.clearTextButtonNewPW);
+                clearConfirmPass = changePassDialog.findViewById(R.id.clearTextButtonConfirmNewPW);
+
+                errorCurrPass = changePassDialog.findViewById(R.id.errorCurrPass);
+                errorNewPass = changePassDialog.findViewById(R.id.errorNewPass);
+                errorConfirmPass = changePassDialog.findViewById(R.id.errorConfirmPass);
+
+                confirmChangePass.setEnabled(true);
+                clearCurrPass.setEnabled(true);
+                clearNewPass.setEnabled(true);
+                clearConfirmPass.setEnabled(true);
+
 
             }
         });
