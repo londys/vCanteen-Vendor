@@ -72,24 +72,6 @@ public class MainActivity extends AppCompatActivity {
 
         orderListListView = findViewById(R.id.orderlist);
 
-        //set fonts from assets here
-        /*Typeface light = Typeface.createFromAsset(getAssets(),"fonts/SF-Pro-Text-Light.otf");
-        Typeface regular = Typeface.createFromAsset(getAssets(),"fonts/SF-Pro-Text-Regular.otf");
-        Typeface medium = Typeface.createFromAsset(getAssets(),"fonts/SF-Pro-Text-Medium.otf");
-        Typeface semibold = Typeface.createFromAsset(getAssets(),"fonts/SF-Pro-Text-Semibold.otf");
-        Typeface bold = Typeface.createFromAsset(getAssets(),"fonts/SF-Pro-Text-Bold.otf");
-
-        orderStatusButton.setTypeface(semibold);
-        menuButton.setTypeface(semibold);
-        salesRecordButton.setTypeface(semibold);
-        settingsButton.setTypeface(semibold);*/
-        /*orderNo.setTypeface(regular);
-        foodName.setTypeface(bold);
-        foodExtra.setTypeface(regular);
-        doneButton.setTypeface(semibold);
-        cancelButton.setTypeface(semibold);
-*/
-
 
         //////////////////////////////////////////   Navigation   //////////////////////////////////////
 
@@ -129,9 +111,9 @@ public class MainActivity extends AppCompatActivity {
 
         //////////////////////////////////////////   Order Adapter   //////////////////////////////////////
 
-        //String[] test = {"Fried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky Rice","Fried Chicken with Sticky RiceFried Chicken with Sticky Rice","Food3","Food4","Fried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky RiceFried Chicken with Sticky Rice","Food6"};
 
         List = new OrderList(orderList);
+
 
         orderLoadUp(); //GET DATA FROM JSON
 
@@ -165,11 +147,9 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("\n\n\n\n********************"+ "Code: " + response.code() +"********************\n\n\n\n");
                     return;
                 }
-                List = new OrderList(orderList);
                 List = response.body();
                 ListAdapter testAdapter = new OrderAdapter(MainActivity.this, List); //Put the arraylist here
                 orderListListView.setAdapter(testAdapter);
-
             }
 
             @Override

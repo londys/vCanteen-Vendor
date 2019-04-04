@@ -5,11 +5,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -62,6 +64,24 @@ public class SettingsActivity extends AppCompatActivity {
 
     ImageView vendorProfilePicture;
 
+
+    Button changePass;
+    Dialog changePassDialog;
+
+    /// FOR CHANGEPASS DIALOG ///
+    EditText currPassBox;
+    EditText newPassBox;
+    EditText confirmNewPassBox;
+    Button confirmChangePass;
+
+    Button clearCurrPass;
+    Button clearNewPass;
+    Button clearConfirmPass;
+
+    TextView errorCurrPass;
+    TextView errorNewPass;
+    TextView errorConfirmPass;
+
     private RequestQueue mQueue;
     private String url="FROM ENDPOINTS";
 
@@ -99,6 +119,34 @@ public class SettingsActivity extends AppCompatActivity {
 
         vendorProfilePicture = findViewById(R.id.vendorProfilePicture);
 
+
+        //////////////////////////////////////////   JSON START UP   //////////////////////////////////////
+
+
+
+        //mQueue = Volley.newRequestQueue(this);
+
+
+
+        accountJSONLoadUp();
+
+
+
+
+        vendorNameInput = (EditText) findViewById(R.id.vendorNameInput);
+        vendorEmailInput = (EditText) findViewById(R.id.vendorEmailInput);
+
+        vendorProfile = (TextView) findViewById(R.id.vendorProfile);
+
+        checkCUNex = (TextView) findViewById(R.id.checkCUNex);
+        checkScb = (TextView) findViewById(R.id.checkScb);
+        checkKplus = (TextView) findViewById(R.id.checkKplus);
+        checkTrueMoney = (TextView) findViewById(R.id.checkTrueMoney);
+
+        vendorProfilePicture = findViewById(R.id.vendorProfilePicture);
+
+
+        changePass = findViewById(R.id.changePasswordButton);
 
         //////////////////////////////////////////   JSON START UP   //////////////////////////////////////
 
@@ -189,12 +237,13 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-        vendorStatusToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        vendorStatusToggle.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+            public void onClick(View v) {
 
-                if(isChecked==false){
-
+                if(!vendorStatusToggle.isChecked()){
+                    vendorStatusToggle.setChecked(true);
 
 
                     final Dialog dialog = new Dialog(SettingsActivity.this);
@@ -204,7 +253,7 @@ public class SettingsActivity extends AppCompatActivity {
                     final TextView title = (TextView) dialog.findViewById(R.id.dialogTitle);
                     final TextView content = (TextView) dialog.findViewById(R.id.dialogContent);
                     Button negativeButton = (Button) dialog.findViewById(R.id.negativeButton);
-                    Button positiveButton = (Button) dialog.findViewById(R.id.positiveButton);
+                    final Button positiveButton = (Button) dialog.findViewById(R.id.positiveButton);
 
 
                     title.setText("Closing Menu");
@@ -225,10 +274,21 @@ public class SettingsActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
 
-                            Toast.makeText(getApplicationContext(), "MENU CLOSED!",  Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                            statusText.setText("CLOSED");
-                            statusText.setTextColor(Color.parseColor("#828282"));
+                            positiveButton.setBackgroundResource(R.drawable.button_grey_rounded);
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    vendorStatusToggle.setChecked(false);
+                                    openCloseVendor("CLOSE");
+                                    Toast.makeText(getApplicationContext(), "VENDOR CLOSED!",  Toast.LENGTH_SHORT).show();
+                                    positiveButton.setBackgroundResource(R.drawable.button_red_rounded);
+                                    dialog.dismiss();
+                                    statusText.setText("CLOSED");
+                                    statusText.setTextColor(Color.parseColor("#828282"));
+
+                                }
+                            }, 2000);
 
                         }
                     });
@@ -237,9 +297,157 @@ public class SettingsActivity extends AppCompatActivity {
 
                 } else {
 
+                    openCloseVendor("OPEN");
                     statusText.setText("OPEN");
                     statusText.setTextColor(getResources().getColor(R.color.pinkPrimary));
                 }
+
+            }
+        });
+
+        ///////////////////// CHANGE PASSWORD ////////////////////////
+        changePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changePassDialog = new Dialog(SettingsActivity.this);
+                changePassDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                changePassDialog.setContentView(R.layout.change_password_dialog);
+
+                currPassBox = changePassDialog.findViewById(R.id.currentPasswordBox);
+                newPassBox = changePassDialog.findViewById(R.id.newPasswordBox);
+                confirmNewPassBox = changePassDialog.findViewById(R.id.confirmNewPasswordBox);
+                confirmChangePass = changePassDialog.findViewById(R.id.confirmChangePasswordButton);
+
+                clearCurrPass = changePassDialog.findViewById(R.id.clearTextButtonCurrentPW);
+                clearNewPass = changePassDialog.findViewById(R.id.clearTextButtonNewPW);
+                clearConfirmPass = changePassDialog.findViewById(R.id.clearTextButtonConfirmNewPW);
+
+                errorCurrPass = changePassDialog.findViewById(R.id.errorCurrPass);
+                errorNewPass = changePassDialog.findViewById(R.id.errorNewPass);
+                errorConfirmPass = changePassDialog.findViewById(R.id.errorConfirmPass);
+
+                confirmChangePass.setEnabled(true);
+                clearCurrPass.setEnabled(true);
+                clearNewPass.setEnabled(true);
+                clearConfirmPass.setEnabled(true);
+
+
+            }
+        });
+
+    }
+
+    private void openCloseVendor(String vendorStatus) {
+
+        url="https://vcanteen.herokuapp.com/";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        Call<Void> call = jsonPlaceHolderApi.editVendorStatus(1, vendorStatus);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                if (!response.isSuccessful()) {
+                    vendorNameInput.setText("Code: " + response.code());
+                    return;
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                vendorProfile.setText(t.getMessage());
+
+
+            }
+        });
+
+    }
+
+
+    private void accountJSONLoadUp() {
+
+        url="https://vcanteen.herokuapp.com/";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        Call<VendorInfoArray> call = jsonPlaceHolderApi.getVendorInfo(1);
+
+        call.enqueue(new Callback<VendorInfoArray>() {
+            @Override
+            public void onResponse(Call<VendorInfoArray> call, Response<VendorInfoArray> response) {
+
+                if (!response.isSuccessful()) {
+                    vendorNameInput.setText("Code: " + response.code());
+                    vendorNameInput.setText("");
+                    return;
+                }
+
+                vendorInfoArray = response.body();
+
+
+                if (vendorInfoArray != null){
+
+                    vendor = vendorInfoArray.vendorInfo.get(0);
+                    vendorNameInput.setText(vendor.getVendorName());
+                    vendorEmailInput.setText(vendor.getVendorEmail());
+                    Glide.with(SettingsActivity.this).load(vendor.getVendorImage()).apply(option).into(vendorProfilePicture);
+                    //This array always have 1 member, so use get(1).
+
+                } else {
+                    vendorNameInput.setText("Receive Null");
+                }
+
+
+
+
+                if(vendorInfoArray.findServiceProviderFromList(vendorInfoArray.getVendorPaymentMethod(), "CU_NEX")){
+                    checkCUNex.setVisibility(View.VISIBLE);
+                }
+
+                if(vendorInfoArray.findServiceProviderFromList(vendorInfoArray.getVendorPaymentMethod(), "SCB_EASY")){
+                    checkScb.setVisibility(View.VISIBLE);
+                }
+
+                if(vendorInfoArray.findServiceProviderFromList(vendorInfoArray.getVendorPaymentMethod(), "K_PLUS")){
+                    checkKplus.setVisibility(View.VISIBLE);
+                }
+
+                if(vendorInfoArray.findServiceProviderFromList(vendorInfoArray.getVendorPaymentMethod(), "TRUEMONEY_WALLET")){
+                    checkTrueMoney.setVisibility(View.VISIBLE);
+                }
+
+
+                if(vendor.getVendorStatus().equals("OPEN")){
+                    vendorStatusToggle.setChecked(true);
+                    statusText.setText("OPEN");
+                    statusText.setTextColor(getResources().getColor(R.color.pinkPrimary));
+                }else{
+                    vendorStatusToggle.setChecked(false);
+                    statusText.setText("CLOSED");
+                    statusText.setTextColor(Color.parseColor("#828282"));
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<VendorInfoArray> call, Throwable t) {
+                vendorProfile.setText(t.getMessage());
+
 
             }
         });
@@ -453,12 +661,7 @@ public class SettingsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-   /* public void goToSettings() {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-    }*/
-
-   public void logOut(){
+    public void logOut(){
        Intent intent = new Intent(this, LoginActivity.class);
        startActivity(intent);
    }

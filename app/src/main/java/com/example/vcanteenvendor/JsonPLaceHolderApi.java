@@ -4,6 +4,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -34,4 +35,41 @@ interface JsonPlaceHolderApi {
     @PUT("b/5c9c37331c56bb1ec38f9c67/2")
     Call<Vendor> getVendor2(@Query("vendorID") int vendorId, @Body Vendor vendor);
 
+    @POST("v1/user-authentication/vendor/check/token")
+    Call<LoginResponse> sendLogin(@Body LoginVendor loginVendor);
+
+    @POST("v1/user-authentication/vendor/password/recover")
+    Call<Void> recoverPass(@Body RecoverPass recoverPass);
+
+    @FormUrlEncoded
+    @PUT("v1/menu-management/vendorId/menu/foodId")
+    Call<Void> editMenu(@Field("vendorId") int vendorId, @Field("foodId") int foodId,
+                        @Field("foodName") String foodName,
+                        @Field("price") int foodPrice,
+                        @Field("foodStatus") String foodStatus,
+                        @Field("foodType")String foodType,
+                        @Field("foodImage") String foodImage);
+
+    @FormUrlEncoded
+    @POST("v1/menu-management/vendorId/menu")
+    Call<Integer> addMenu(@Field("vendorId") int vendorId,
+                        @Field("foodName") String foodName,
+                        @Field("price") int foodPrice,
+                        @Field("foodStatus") String foodStatus,
+                        @Field("foodType")String foodType,
+                        @Field("foodImage") String foodImage);
+
+    @DELETE("v1/menu-management/{vendorId}/menu/{foodId}")
+    Call<Void> deleteMenu(@Path("vendorId") int vendorId,
+                          @Path("foodId") int foodId);
+
+    @FormUrlEncoded
+    @PUT("v1/settings/vendorId/status")
+    Call<Void> editVendorStatus(@Field("vendorId") int vendorId,
+                                @Field("vendorStatus") String vendorStatus);
+
+    @FormUrlEncoded
+    @PUT("v1/vendor-main/order/status")
+    Call<Void> editOrderStatus(@Field("orderId") int orderId,
+                                @Field("orderStatus") String orderStatus);
 }

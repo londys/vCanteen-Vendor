@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListAdapter;
 
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,9 +33,15 @@ public class MenuActivity extends AppCompatActivity {
 
     RecyclerView combinationMenuRecyclerView;
     RecyclerView alacarteMenuRecyclerView;
+
+
+    MenuRecyclerviewAdapter combinationMenuAdapter;
+    MenuRecyclerviewAdapter alacarteMenuAdapter;
     
     //List<Menu> lstMenu;
     CombinationAlacarteList combinationAlacarteList;
+
+    RequestOptions option = new RequestOptions().centerCrop();
 
 
     @Override
@@ -82,8 +90,6 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-
-
         addMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +98,28 @@ public class MenuActivity extends AppCompatActivity {
         });
 
 
+        menuLoadUp();
 
+
+    }
+
+
+
+
+
+    public void menuLoadUp() {
+
+        String url="https://vcanteen.herokuapp.com/";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
+        Call<CombinationAlacarteList> call = jsonPlaceHolderApi.getAllMenu(1); //SET LOGIC TO INSERT ID HERE
 
         /*lstMenu = new ArrayList<>();
         lstMenu.add(new Menu("Fried Chicken with Sticky Rice",300,0001,R.drawable.food_pic1));
@@ -145,17 +172,22 @@ public class MenuActivity extends AppCompatActivity {
 
                 combinationAlacarteList = response.body();
 
-                MenuRecyclerviewAdapter combinationMenuAdapter = new MenuRecyclerviewAdapter(MenuActivity.this,combinationAlacarteList.combinationList);
+                combinationMenuAdapter = new MenuRecyclerviewAdapter(MenuActivity.this,combinationAlacarteList.combinationList);
                 combinationMenuRecyclerView.setLayoutManager(new GridLayoutManager(MenuActivity.this,4));
                 combinationMenuRecyclerView.setAdapter(combinationMenuAdapter);
 
-
-
-                MenuRecyclerviewAdapter alacarteMenuAdapter = new MenuRecyclerviewAdapter(MenuActivity.this,combinationAlacarteList.alacarteList);
+                alacarteMenuAdapter = new MenuRecyclerviewAdapter(MenuActivity.this,combinationAlacarteList.alacarteList);
                 alacarteMenuRecyclerView.setLayoutManager(new GridLayoutManager(MenuActivity.this,4));
                 alacarteMenuRecyclerView.setAdapter(alacarteMenuAdapter);
-                
 
+                //combinationMenuAdapter.notifyDataSetChanged();
+                //alacarteMenuAdapter.notifyDataSetChanged();
+
+
+
+
+            }
+        });
 
             }
 
@@ -167,6 +199,17 @@ public class MenuActivity extends AppCompatActivity {
         });
 
     }
+
+
+
+
+    /*@Override
+    public void onResume(){
+        super.onResume();
+        menuLoadUp();
+
+
+    }*/
 
 
     //////////////////////////////////////////   Navigation(cont.)   //////////////////////////////////////
@@ -196,4 +239,7 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddEditMenuActivity.class);
         startActivity(intent);
     }
+
+
+
 }
